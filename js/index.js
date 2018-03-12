@@ -13,17 +13,19 @@ $(function () {
     var index=0;
     var timer="";
     timer = setInterval(play,2000);
-    //timer = setTimeout(play,2000);
+     var lunbo=function () {
+         $(".banner-cont li").eq(index).show().siblings().hide();
+         $(".bannerpager ul li").eq(index).addClass("current").siblings().removeClass("current");
+     };
     //自动轮播函数
     function play() {
         index++;
         if(index===length){
             index=0;
         }
-        $(".banner-cont li").eq(index).show().siblings().hide();
-        $(".bannerpager ul li").eq(index).addClass("current").siblings().removeClass("current");
+       lunbo();
         //setTimeout(play,2000);
-        console.log("自动播放："+index);
+        //console.log("自动播放："+index);
     }
     //鼠标放在图片上，图片不动
     $(".banner-cont li").hover(function () {
@@ -36,8 +38,7 @@ $(function () {
     $(".bannerpager ul li").hover(function () {
         clearInterval(timer);
         index=$(this).index();
-        $(".banner-cont li").eq(index).show().siblings().hide();
-        $(".bannerpager ul li").eq(index).addClass("current").siblings().removeClass("current");
+       lunbo();
 
     },function () {
         clearInterval(timer);
@@ -49,9 +50,8 @@ $(function () {
         if(index<0){
             index=length-1;
         }
-        console.log("点击左边："+index);
-        $(".banner-cont li").eq(index).show().siblings().hide();
-        $(".bannerpager ul li").eq(index).addClass("current").siblings().removeClass("current");
+        //console.log("点击左边："+index);
+        lunbo();
     }).mouseleave(function () {
         clearInterval(timer);
         timer = setInterval(play,2000);
@@ -62,9 +62,8 @@ $(function () {
         if(index===length){
             index=0;
         }
-        console.log("右边点击："+index);
-        $(".banner-cont li").eq(index).show().siblings().hide();
-        $(".bannerpager ul li").eq(index).addClass("current").siblings().removeClass("current");
+        //console.log("右边点击："+index);
+     lunbo();
     }).mouseleave(function () {
         clearInterval(timer);
         timer = setInterval(play,2000);
